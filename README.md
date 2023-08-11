@@ -6,7 +6,7 @@
     - Conceito de Aplicações Web
     - O que é o React JS
     - Por que e quando se deve usar o React
-- React
+- Sobre o React
     - Iniciando um projeto React
     - Conhecendo a estrutura de pasta
         - Convensões
