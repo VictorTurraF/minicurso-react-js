@@ -2,8 +2,8 @@
 
 ## Conteúdo
 - Conceitos
-    - Conceito de SPA
-    - Conceito de Aplicações Web
+    - [Conceito de SPA](https://github.com/VictorTurraF/minicurso-react-js/blob/main/conceitos/conceito-de-spa.md)
+    - [Conceito de Aplicações Web](https://github.com/VictorTurraF/minicurso-react-js/blob/main/conceitos/aplicacoes-web.md)
     - O que é o React JS
     - Por que e quando se deve usar o React
 - Sobre o React

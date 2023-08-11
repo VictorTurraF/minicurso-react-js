@@ -70,3 +70,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>,
 )
 ```
+
+No JSX os atributos padrão do html são escritos em camelCase ao invés de slug-case.
+e os valores entre
+
+Por exemplo em html:
+```html
+<button type="submit" onclick="myFunction()">Botão</button>
+<input type="text" onchange="otherFunction()" />
+```
+
+Ficariam assim em JSX:
+```jsx
+<button type="submit" onClick={myFunction}>Botão</button>
+<input type="text" onChange={otherFunction} />
+```
