@@ -7,10 +7,10 @@
     - O que é o React JS
     - Por que e quando se deve usar o React
 - Sobre o React
-    - [Iniciando um projeto React](https://github.com/VictorTurraF/minicurso-react-js/blob/12ab0d23345ede34b3955e9d41c630b61022beef/sobre-o-react/iniciando-um-projeto.md)
-    - [Conhecendo a estrutura de pasta](https://github.com/VictorTurraF/minicurso-react-js/blob/12ab0d23345ede34b3955e9d41c630b61022beef/sobre-o-react/conhecendo-a-estrutura-de-pastas.md)
+    - [Iniciando um projeto React](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/iniciando-um-projeto.md)
+    - [Conhecendo a estrutura de pasta](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/conhecendo-a-estrutura-de-pastas.md)
         - Convensões
-    - [JSX](https://github.com/VictorTurraF/minicurso-react-js/blob/12ab0d23345ede34b3955e9d41c630b61022beef/sobre-o-react/react-jsx.md)
+    - [JSX](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/react-jsx.md)
     - Componentização
     - Gerenciamento de Estado
     - Virtual DOM
