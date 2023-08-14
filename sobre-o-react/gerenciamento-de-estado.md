@@ -2,8 +2,6 @@
 
 Além das props, os componentes também podem ter um estado interno. O estado é mutável e pode ser usado para armazenar dados que podem mudar ao longo do tempo. Quando o estado de um componente muda, o React atualiza automaticamente a representação visual desse componente.
 
-Claro! O estado de um componente no React é uma parte importante para armazenar e gerenciar dados que podem mudar ao longo do tempo. Vou lhe dar um exemplo simples para ilustrar como o estado de um componente funciona.
-
 Suponha que você esteja construindo um contador. Vamos criar um componente `Counter` que exibe um número e um botão para incrementar esse número:
 
 1. `Counter.js`:
