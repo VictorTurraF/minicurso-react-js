@@ -1,25 +1,67 @@
-import { useState } from 'react'
-import './App.css'
+import { styled } from "@stitches/react"
+import { Box } from "./layouts/Box"
+import { rebootCss } from "./styles/reboot"
+import TaksList from "./components/TaksList";
+import { Button } from "./layouts/Button";
+import TimerDisplay from "./components/Timer";
+import TimerProgress from "./components/TimerProgress";
+import Controlls from "./components/Controlls";
+import { useState } from "react";
+import Modal from "./components/Modal";
+
+const AppGrid = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: "6fr 4fr",
+  gridGap: "2rem",
+  maxWidth: "1000px",
+  margin: "3rem auto",
+})
+
+const AddTaskButton = styled(Button, {
+  marginBottom: "1rem"
+})
+
+rebootCss();
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tasks, setTasks] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const addTask = (task) => {
+    setTasks([...tasks, task]);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalSubmit = (task) => {
+    addTask(task);
+    closeModal();
+  };
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AppGrid>
+      <Box>
+        <TimerDisplay />
+        <TimerProgress />
+        <Controlls />
+      </Box>
+      <Box>
+        <AddTaskButton onClick={openModal}>Adicionar Tarefa</AddTaskButton>
+        <TaksList tasks={tasks} />
+      </Box>
+      <Modal 
+        isModalOpen={isModalOpen} 
+        onModalClose={closeModal} 
+        onTaksFormSubmit={handleModalSubmit} 
+      />
+    </AppGrid>
+  );
 }
 
 export default App
