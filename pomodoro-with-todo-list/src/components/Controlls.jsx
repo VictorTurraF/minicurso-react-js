@@ -6,13 +6,14 @@ const Row = styled(R, {
   marginTop: "2rem"
 })
 
-function Controlls({ 
-  onInitClick = () => {},
-  onFinishStepClick = () => {}
+function Controlls({
+  onTimerToggle = () => { },
+  onFinishStepClick = () => { },
+  isTimerRunning = false
 }) {
   return (
     <Row>
-      <Button onClick={onInitClick}>Iniciar</Button>
+      {isTimerRunning ? <Button onClick={onTimerToggle} variant="secondary">Pausar</Button> : <Button onClick={onTimerToggle}>Iniciar</Button>}
       <Button onClick={onFinishStepClick} variant="secondary">Finalizar Pomodoro</Button>
     </Row>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { Input } from '../layouts/Input';
 import { styled } from '@stitches/react';
 import { Row } from '../layouts/Row';
@@ -25,11 +25,13 @@ const NumberInput = styled(Input, {
 function TaskForm({ onClose, onSubmit }) {
   const [description, setDescription] = useState('');
   const [estimatedPomodoros, setEstimatedPomodoros] = useState(1);
+  const id = useId()
 
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit({
       event, form: {
+        id,
         description,
         estimatedPomodoros
       }
@@ -58,7 +60,7 @@ function TaskForm({ onClose, onSubmit }) {
           />
         </InputRow>
         <Row style={{ marginTop: "1rem" }}>
-          <Button type="button">Criar Tarefa</Button>
+          <Button>Criar Tarefa</Button>
           <Button variant="secondary" type="button" onClick={onClose}>Cancelar</Button>
         </Row>
       </Form>

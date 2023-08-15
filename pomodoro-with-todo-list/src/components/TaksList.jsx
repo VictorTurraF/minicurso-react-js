@@ -7,6 +7,7 @@ function TaksList({ tasks }) {
       {tasks.map((task, index) => (
         <TaskListItem
           key={index}
+          id={task.id}
           isCompleted={task.isCompleted}
           description={task.description}
           actPomodoros={task.actPomodoros}

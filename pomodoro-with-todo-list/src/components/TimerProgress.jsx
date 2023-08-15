@@ -17,10 +17,12 @@ const Indicator = styled('div', {
   borderRadius: ".25rem"
 });
 
-function TimerProgress() {
+function TimerProgress({ totalSeconds = 0, remainingSeconds = 0 }) {
+  const progress = (totalSeconds - remainingSeconds) / totalSeconds * 100;
+
   return (
     <Tracker>
-      <Indicator />
+      <Indicator style={{ width: `${progress}%` }} />
     </Tracker>
   )
 }
