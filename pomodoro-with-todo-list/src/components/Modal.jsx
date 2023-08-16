@@ -9,7 +9,19 @@ const Overlay = styled('div', {
   display: 'flex',
   alignItems: "center",
   justifyContent: "center",
-  inset: 0
+  inset: 0,
+  opacity: 0,
+  transition: "opacity .3s ease-in-out",
+  variants: {
+    isOpen: {
+      [true]: {
+        opacity: 1
+      },
+      [false]: {
+        opacity: 0
+      }
+    }
+  }
 })
 
 const ModalContainer = styled('div', {
@@ -18,7 +30,12 @@ const ModalContainer = styled('div', {
   backgroundColor: "#fff"
 })
 
-function Modal({ isModalOpen = false, onModalClose = () => {}, onTaksFormSubmit = () => {} }) {
+function Modal({ 
+  isModalOpen = false, 
+  isModalMounted = false, 
+  onModalClose = () => { },
+  children
+}) {
   function handleOverlayClick(event) {
     if (event.target === event.currentTarget) {
       onModalClose(event)
@@ -26,11 +43,11 @@ function Modal({ isModalOpen = false, onModalClose = () => {}, onTaksFormSubmit 
   }
 
   return (
-    isModalOpen && (
+    isModalMounted && (
       createPortal(
-        <Overlay onClick={handleOverlayClick}>
+        <Overlay isOpen={isModalOpen} onClick={handleOverlayClick}>
           <ModalContainer>
-            <TaskForm onClose={onModalClose} onSubmit={onTaksFormSubmit} />
+            {children}
           </ModalContainer>
         </Overlay>,
         document.body

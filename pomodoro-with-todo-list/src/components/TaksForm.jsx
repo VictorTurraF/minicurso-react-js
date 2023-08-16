@@ -22,10 +22,13 @@ const NumberInput = styled(Input, {
   width: "5rem",
 })
 
-function TaskForm({ onClose, onSubmit }) {
+function TaskForm({ 
+  onCloseClick = () => {}, 
+  onSubmit = () => {} 
+}) {
   const [description, setDescription] = useState('');
   const [estimatedPomodoros, setEstimatedPomodoros] = useState(1);
-  const id = useId()
+  const id = self.crypto.randomUUID()
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,7 +39,7 @@ function TaskForm({ onClose, onSubmit }) {
         estimatedPomodoros
       }
     });
-    onClose();
+    onCloseClick(event);
   };
 
   return (
@@ -61,7 +64,7 @@ function TaskForm({ onClose, onSubmit }) {
         </InputRow>
         <Row style={{ marginTop: "1rem" }}>
           <Button>Criar Tarefa</Button>
-          <Button variant="secondary" type="button" onClick={onClose}>Cancelar</Button>
+          <Button variant="secondary" type="button" onClick={onCloseClick}>Cancelar</Button>
         </Row>
       </Form>
     </Container>
