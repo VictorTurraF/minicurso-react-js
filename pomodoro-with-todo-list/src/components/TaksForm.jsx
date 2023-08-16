@@ -36,7 +36,8 @@ function TaskForm({
       event, form: {
         id,
         description,
-        estimatedPomodoros
+        estimatedPomodoros,
+        actPomodoros: 0
       }
     });
     onCloseClick(event);
@@ -59,7 +60,11 @@ function TaskForm({
           <NumberInput
             type="number"
             value={estimatedPomodoros}
-            onChange={(e) => setEstimatedPomodoros(e.target.value)}
+            onChange={(e) => {
+              const newValue = e.target.value
+              const filteredNumbersValue = newValue.replace(/[^0-9]/ig, '')
+              setEstimatedPomodoros(Number(filteredNumbersValue) || "")}
+            }
           />
         </InputRow>
         <Row style={{ marginTop: "1rem" }}>

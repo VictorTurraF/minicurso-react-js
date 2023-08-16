@@ -1,13 +1,11 @@
+import { useEffect, useState } from "react";
 import { styled } from "@stitches/react"
 import { rebootCss } from "./styles/reboot"
-
-import { useEffect, useState } from "react";
-import { settings } from "./configs/settings";
+import { durationMap, pomodoroSteps, settings } from "./configs/settings";
+import { configsTable, taskTable } from "./configs/storages";
 import TimerContainer from "./components/TimerContainer";
 import TaskContainer from "./components/TaskContainer";
 import useList from "./hooks/useList";
-
-import localforage from "localforage";
 
 const AppGrid = styled('div', {
   display: 'grid',
@@ -19,44 +17,16 @@ const AppGrid = styled('div', {
 
 rebootCss();
 
-const pomodoroSteps = [
-  'pomodoro',
-  'short-break',
-  'pomodoro',
-  'short-break',
-  'pomodoro',
-  'short-break',
-  'pomodoro',
-  'long-break',
-]
-
-const durationMap = new Map([
-  ['pomodoro', settings.pomodoroDurationInSeconds],
-  ['short-break', settings.shortBreakDurationInSeconds],
-  ['long-break', settings.longBreakDurationInSeconds]
-])
-
 function App() {
-  var taskTable = localforage.createInstance({
-    name: "site-data",
-    storeName: "tasks",
-    description: "Task list",
-  });
-
-  var configsTable = localforage.createInstance({
-    name: "site-data",
-    storeName: 'configs',
-    description: 'Application settings'
-  })
-
   const {
     list: tasks,
+    setList: setTasks,
     addItem: addTask,
     removeItemByField: removeTaskBy,
-    setList: setTasks
+    updateItemByField: updateTaskBy
   } = useList([])
 
-  const [selectedTask, setSelectedTask] = useState('');
+  const [selectedTaskId, setSelectedTaskId] = useState();
 
   const [remainingSeconds, setRemainingSeconds] = useState(settings.pomodoroDurationInSeconds);
   const [currentStep, setCurrentStep] = useState(0)
@@ -101,9 +71,18 @@ function App() {
   }, [isTimerRunning, stepPosition]);
 
   const advanceStep = () => {
+    if (pomodoroSteps[stepPosition] === "pomodoro") {
+      const selectedTask = tasks.find(task => task.id === selectedTaskId);
+      updateTaskBy('id', selectedTaskId, { 
+        ...selectedTask, 
+        actPomodoros: selectedTask.actPomodoros + 1 
+      })
+    }
+
     const nextStep = pomodoroSteps[(currentStep + 1) % 8]
     setRemainingSeconds(durationMap.get(nextStep))
     setCurrentStep(prev => prev + 1)
+
   }
 
   const handleTaksFormSubmit = ({ form: task }) => {
@@ -122,6 +101,11 @@ function App() {
     taskTable.removeItem(taskId)
   }
 
+  const handleTaskSelectClick = ({ taskId }) => {
+    setSelectedTaskId(taskId)
+    configsTable.setItem('selectedTaskId', taskId)
+  }
+
   useEffect(() => {
     const tasks = []
     taskTable
@@ -135,8 +119,8 @@ function App() {
 
   useEffect(() => {
     configsTable
-      .getItem('selectedTask')
-      .then(value => setSelectedTask(value))
+      .getItem('selectedTaskId')
+      .then(value => setSelectedTaskId(value))
   }, [])
 
   return (
@@ -153,6 +137,8 @@ function App() {
         tasks={tasks}
         onTaskFormSubmit={handleTaksFormSubmit}
         onTaskDeleteClick={handleTaskDeleteClick}
+        onTaskSelectClick={handleTaskSelectClick}
+        selectedTaskId={selectedTaskId}
       />
     </AppGrid>
   );

@@ -30,6 +30,18 @@ export default function useList(initialList = []) {
     });
   };
 
+  const updateItemByField = (fieldName, fieldValue, newItem) => {
+    setList((prevList) => {
+      const updatedList = prevList.map(item => {
+        if (item[fieldName] === fieldValue) {
+          return { ...item, ...newItem };
+        }
+        return item;
+      });
+      return updatedList;
+    });
+  };
+
   const clearList = () => {
     setList([]);
   };
@@ -40,6 +52,7 @@ export default function useList(initialList = []) {
     removeItem,
     removeItemByField,
     updateItem,
+    updateItemByField,
     clearList,
     setList
   };

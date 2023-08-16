@@ -1,15 +1,27 @@
 import { styled } from "@stitches/react"
 import { Button } from "../layouts/Button"
+import { schema } from "../configs/theme"
 
 const TaskRow = styled('div', {
   display: "grid",
   gridTemplateColumns: "auto 1fr auto auto",
   gridGap: "1rem",
   alignItems: "center",
-  padding: '1rem',
+  padding: '.75rem',
   background: "#fff",
   borderRadius: ".5rem",
-  cursor: "pointer"
+  cursor: "pointer",
+  transition: "border .3s ease-in-out",
+  variants: {
+    isActive: {
+      [true]: {
+        border: `4px solid ${schema.primary}`
+      },
+      [false]: {
+        border: `4px solid transparent`
+      }
+    }
+  }
 })
 
 const DescriptionCol = styled('span', {
@@ -24,15 +36,20 @@ function Task({
   description = "",
   estimatedPomodoros = 0,
   actPomodoros = 0,
-  onDeleteClick = () => {}
+  onDeleteClick = () => {},
+  onClick = () => {},
+  isActive = false
 }) {
-
   function handleDeleteClick(event) {
     onDeleteClick({ event, taskId: id })
   }
 
+  function handleSelectClick(event) {
+    onClick({ event, taskId: id })
+  }
+
   return (
-    <TaskRow>
+    <TaskRow isActive={isActive} onClick={handleSelectClick}>
       <input name={id} type="checkbox" onChange={() => {}} checked={isCompleted} />
       <DescriptionCol title={description}>{description}</DescriptionCol>
       <span>{actPomodoros}/{estimatedPomodoros}</span>

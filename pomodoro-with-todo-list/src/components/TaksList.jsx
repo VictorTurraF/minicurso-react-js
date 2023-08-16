@@ -1,7 +1,12 @@
 import { List } from '../layouts/List'
 import TaskListItem from './TaskListItem'
 
-function TaksList({ tasks, onTaksDeleteClick = () => {} }) {
+function TaksList({ 
+  tasks = [], 
+  onTaskDeleteClick = () => {}, 
+  onTaskSelectClick = () => {}, 
+  selectedTaskId = "" 
+}) {
   return (
     <List>
       {tasks.map((task, index) => (
@@ -12,7 +17,9 @@ function TaksList({ tasks, onTaksDeleteClick = () => {} }) {
           description={task.description}
           actPomodoros={task.actPomodoros}
           estimatedPomodoros={task.estimatedPomodoros}
-          onDeleteClick={onTaksDeleteClick}
+          onDeleteClick={onTaskDeleteClick}
+          onClick={onTaskSelectClick}
+          isActive={task.id === selectedTaskId}
         />
       ))}
     </List>

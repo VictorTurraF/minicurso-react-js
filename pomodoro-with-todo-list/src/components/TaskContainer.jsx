@@ -11,14 +11,25 @@ const AddTaskButton = styled(Button, {
   marginBottom: "1rem"
 })
 
-function TaskContainer({ tasks = [], onTaskFormSubmit = () => {}, onTaskDeleteClick = () => {} }) {
+function TaskContainer({ 
+  tasks = [], 
+  onTaskFormSubmit = () => {}, 
+  onTaskDeleteClick = () => {},
+  onTaskSelectClick = () => {},
+  selectedTaskId = "",
+}) {
   const { modalProps, closeModal, openModal } = useModal();
 
   return (
     <>
       <Box>
         <AddTaskButton onClick={openModal}>Adicionar Tarefa</AddTaskButton>
-        <TaksList onTaksDeleteClick={onTaskDeleteClick} tasks={tasks} />
+        <TaksList
+          tasks={tasks}
+          onTaskDeleteClick={onTaskDeleteClick}
+          onTaskSelectClick={onTaskSelectClick}
+          selectedTaskId={selectedTaskId}
+        />
       </Box>
       <Modal {...modalProps}>
         <TaskForm onCloseClick={closeModal} onSubmit={onTaskFormSubmit} />
