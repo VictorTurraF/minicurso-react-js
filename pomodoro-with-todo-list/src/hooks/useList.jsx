@@ -34,6 +34,10 @@ export default function useList(initialList = []) {
     setList((prevList) => {
       const updatedList = prevList.map(item => {
         if (item[fieldName] === fieldValue) {
+          if (typeof newItem === "function") {
+            return newItem(item);
+          }
+          
           return { ...item, ...newItem };
         }
         return item;

@@ -16,6 +16,7 @@ function TaskContainer({
   onTaskFormSubmit = () => {}, 
   onTaskDeleteClick = () => {},
   onTaskSelectClick = () => {},
+  onFinishTaskClick = () => {},
   selectedTaskId = "",
 }) {
   const { modalProps, closeModal, openModal } = useModal();
@@ -28,6 +29,7 @@ function TaskContainer({
           tasks={tasks}
           onTaskDeleteClick={onTaskDeleteClick}
           onTaskSelectClick={onTaskSelectClick}
+          onFinishTaskClick={onFinishTaskClick}
           selectedTaskId={selectedTaskId}
         />
       </Box>

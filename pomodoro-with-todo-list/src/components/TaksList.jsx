@@ -5,7 +5,8 @@ function TaksList({
   tasks = [], 
   onTaskDeleteClick = () => {}, 
   onTaskSelectClick = () => {}, 
-  selectedTaskId = "" 
+  onFinishTaskClick = () => {},
+  selectedTaskId = "",
 }) {
   return (
     <List>
@@ -13,13 +14,14 @@ function TaksList({
         <TaskListItem
           key={index}
           id={task.id}
-          isCompleted={task.isCompleted}
           description={task.description}
           actPomodoros={task.actPomodoros}
           estimatedPomodoros={task.estimatedPomodoros}
           onDeleteClick={onTaskDeleteClick}
           onClick={onTaskSelectClick}
-          isActive={task.id === selectedTaskId}
+          isSelected={task.id === selectedTaskId}
+          onFinishClick={onFinishTaskClick}
+          isFinished={!!task?.isFinished}
         />
       ))}
     </List>

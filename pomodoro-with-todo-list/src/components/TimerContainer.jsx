@@ -23,7 +23,7 @@ function TimerContainer({
         totalSeconds={fullStepDuration}
         remainingSeconds={remainingSeconds}
       />
-      <Controlls 
+      <Controlls
         isTimerRunning={isTimerRunning} 
         onTimerToggle={onTimerToggle} 
         onFinishStepClick={onFinishStepClick} 

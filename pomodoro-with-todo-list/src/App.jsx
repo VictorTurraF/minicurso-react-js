@@ -76,10 +76,13 @@ function App() {
   };
 
   const incrementTaskActPomodoros = (task) => {
-    updateTaskBy("id", task.id, {
+    const newTask = {
       ...task,
       actPomodoros: task.actPomodoros + 1,
-    });
+    }
+
+    updateTaskBy("id", task.id, newTask);
+    taskTable.setItem(task.id, newTask)
   }
 
   const advanceStep = () => {
@@ -97,6 +100,13 @@ function App() {
   const handleFinishStepClick = () => {
     incrementPomodoroAndAdvanceStep();
   };
+
+  const handleFinishTaskClick = ({ taskId }) => {
+    updateTaskBy('id', taskId, (prev) => ({ 
+      ...prev,
+      isFinished: !prev?.isFinished
+    }))
+  }
 
   const handleTaskDeleteClick = ({ taskId }) => {
     removeTaskBy("id", taskId);
@@ -123,8 +133,14 @@ function App() {
   useEffect(() => {
     configsTable
       .getItem("selectedTaskId")
-      .then((value) => setSelectedTaskId(value));
+      .then((value) => value && setSelectedTaskId(value));
   }, []);
+
+  useEffect(() => {
+    configsTable
+      .getItem('finishedTasks')
+      .then(value => value && setFinishedTasks(value))
+  }, [])
 
   return (
     <AppGrid>
@@ -142,6 +158,7 @@ function App() {
         onTaskDeleteClick={handleTaskDeleteClick}
         onTaskSelectClick={handleTaskSelectClick}
         selectedTaskId={selectedTaskId}
+        onFinishTaskClick={handleFinishTaskClick}
       />
     </AppGrid>
   );

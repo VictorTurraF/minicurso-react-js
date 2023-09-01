@@ -13,7 +13,7 @@ const TaskRow = styled('div', {
   cursor: "pointer",
   transition: "border .3s ease-in-out",
   variants: {
-    isActive: {
+    isSelected: {
       [true]: {
         border: `4px solid ${schema.primary}`
       },
@@ -28,30 +28,57 @@ const DescriptionCol = styled('span', {
   overflowX: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: "nowrap",
+  variants: {
+    isFinished: {
+      [true]: {
+        textDecoration: "line-through"
+      },
+      [false]: {
+        textDecoration: "none"
+      }
+    }
+  }
 })
 
 function Task({
   id = "",
-  isCompleted = false,
   description = "",
   estimatedPomodoros = 0,
   actPomodoros = 0,
-  onDeleteClick = () => {},
-  onClick = () => {},
-  isActive = false
+  onFinishClick = () => { },
+  onDeleteClick = () => { },
+  onClick = () => { },
+  isSelected = false,
+  isFinished = false
 }) {
   function handleDeleteClick(event) {
     onDeleteClick({ event, taskId: id })
   }
 
   function handleSelectClick(event) {
+    const checkboxEl = event.currentTarget.querySelector('input[type=checkbox]')
+
+    if (checkboxEl.contains(event.target) || checkboxEl === event.target) {
+      return;
+    }
+
     onClick({ event, taskId: id })
   }
 
+  function handleFinishTaskClick(event) {
+    onFinishClick({ event, taskId: id })
+  }
+
   return (
-    <TaskRow isActive={isActive} onClick={handleSelectClick}>
-      <input name={id} type="checkbox" onChange={() => {}} checked={isCompleted} />
-      <DescriptionCol title={description}>{description}</DescriptionCol>
+    <TaskRow isSelected={isSelected} onClick={handleSelectClick}>
+      <input
+        name={id}
+        type="checkbox"
+        value="teste"
+        onChange={handleFinishTaskClick}
+        checked={isFinished}
+      />
+      <DescriptionCol isFinished={isFinished} title={description}>{description}</DescriptionCol>
       <span>{actPomodoros}/{estimatedPomodoros}</span>
       <Button variant="secondary" onClick={handleDeleteClick}>Excluir</Button>
     </TaskRow>
