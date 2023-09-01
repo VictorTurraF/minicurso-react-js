@@ -14,13 +14,6 @@
     - [Componentização](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/componentizacao.md)
     - [Gerenciamento de Estado](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/gerenciamento-de-estado.md)
     - [Virtual DOM](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/virtual-dom.md)
-- Exemplo com Projeto
-    - Fazendo a interface
-    - Separando os componentes
-        - Composição ao invés de herança
-    - Adição de estados
-    - Persistência de informações
-
 
 ## Cases na Eficaz
 - [Toca Imoveis](https://www.tocaimoveis.com.br/)
