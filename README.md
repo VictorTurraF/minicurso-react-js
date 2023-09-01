@@ -13,7 +13,7 @@
     - [JSX](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/react-jsx.md)
     - [Componentização](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/componentizacao.md)
     - [Gerenciamento de Estado](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/gerenciamento-de-estado.md)
-    - Virtual DOM
+    - [Virtual DOM](https://github.com/VictorTurraF/minicurso-react-js/blob/main/sobre-o-react/virtual-dom.md)
 - Exemplo com Projeto
     - Fazendo a interface
     - Separando os componentes
